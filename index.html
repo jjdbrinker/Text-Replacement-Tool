@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Text Replacement Tool</title>
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container">
+    <header class="py-4">
+        <h1>Text Replacement Tool</h1>
+        <p>Extremely simple text replacement tool to do quick in-line text replacements. </p>
+    </header>
+    <hr/>
+    <div id="notice" class="alert alert-warning"></div>
+    <form>
+       <div class="row">
+            <div class="col-sm">
+                <label><strong>1</strong> - Find the content of this box..</label>
+                <input class="form-control" required type="text" id="find" placeholder="en_GB"></input>
+            </div>
+            <div class="col-sm-8">
+                <label><strong>2.</strong> - .. in the content of this box.</label>
+                <input class="form-control" required type="text" id="source" placeholder="/website/content/en_GB/info/contact"></input>
+            </div>
+        </div>
+        <div class="row py-4">
+            <div class="col-sm">
+                <label><strong>3.</strong> - Then select the items to include..</label>
+                <div id="checkboxes" class="form-control">
+                    <!-- bunch of checkboxes will be generated dynamically -->
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <label><strong>4.</strong> - .. and press <kbd>Enter</kbd> or click on the magical transform button below.</label>
+                <br/>
+                </label><input type="submit" id="transform" class="btn mt-1 mb-4 btn-lg btn-success" value="Transform"></input><br/>
+                <label>
+                    <strong>5.</strong> - The tool will output the results in the box below.
+                </label>
+                <textarea class="form-control" id="destination" rows="10"></textarea>
+                </div>
+        </div>
+    </form>
+    <div id="sourceSnippet">en_RU, ru_RU, ru_UA, en_UA, uk_UA, en_IE, en_DK, da_DK, en_FI, fi_FI, en_IS, is_IS, en_NO, no_NO, th_NO, th_SE, en_SE, sv_SE,
+        sv_FI, en_HU, hu_HU, en_CZ, cs_CZ, en_PL, pl_PL, en_RO, ro_RO, en_SK, sk_SK, en_ES, es_ES, en_FR, fr_FR, fr_BE, fr_CH, fr_LU,
+        en_AT, en_BE, en_IT, it_IT, it_CH, en_NL, nl_NL, nl_BE, en_LU, en_DE, de_DE, de_AT, de_CH, de_LU, en_PT, pt_PT, en_ZA, zh_ZA,
+        en_IL, iw_IL</div>
+    <footer>Created by <a href="https://github.com/jjdbrinker">Jan-Joost den Brinker</a> - 2018</footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="assets/js/client.js"></script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,17 @@
+#sourceSnippet {
+    display: none;
+}
+
+#notice {
+    display: none;
+}
+#source {
+    width: 100%;
+}
+#checkboxes {
+    height: auto;
+}
+#destination {
+    resize: vertical;
+    height: auto;
+}
