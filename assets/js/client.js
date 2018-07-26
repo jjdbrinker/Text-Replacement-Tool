@@ -5,7 +5,7 @@ $(document).ready(function () {
         if (contentParsed.length > 1) {
             for (let i = 0; i < contentParsed.length; i++) {
                 const element = contentParsed[i].trim();
-                $("#checkboxes").append(`<input type="checkbox" checked name="replacement" value="${element}">${element}<br/>`);
+                $("#checkboxes").append(`<input type="checkbox" name="replacement" class="replaceChoice" value="${element}">${element}<br/>`);
             }
         } else {
             displayNotice("Source content was empty or invalid. Please edit index.html and add data to the #sourceSnippet element.<br/><br/>The data has to comma separated (e.g. value1, value2)"); 
@@ -26,19 +26,32 @@ $(document).ready(function () {
         }
 
         /* empty destination box */
-        destination.val("");
+        destination.html("");
 
         for (let i = 0; i < selectedReplacements.length; i++) {
-            const replacedString = source.replace(find, selectedReplacements[i]);
+            var findRegex = new RegExp(find,"g");
+            const replacedString = source.replace(findRegex, selectedReplacements[i]);
             if(i != selectedReplacements.length) {
-                destination.val(destination.val() + replacedString + "\n");
+                destination.append(replacedString + "<br/>");
             } else {
-                destination.val(destination.val() + replacedString);
+                destination.append(replacedString);
             }
         }
         return false;    
     });
-
+    $("#toggleAll").click(function(event) {
+        event.preventDefault(); 
+        if($("#toggleAll").hasClass("allSelected")) {
+            $(".replaceChoice").prop("checked", false);
+            $("#toggleAll").removeClass("allSelected");
+            $("#toggleAll").text("Select All"); 
+        } else {
+            $("#toggleAll").addClass("allSelected");
+            $("#toggleAll").text("Unselect All");
+            $(".replaceChoice").prop("checked", true);
+        }        
+        return false;
+    });
     function hideNotice() {
         $("#notice").fadeOut();
     }
@@ -46,9 +59,6 @@ $(document).ready(function () {
         $("#notice").html(msg);
         $("#notice").fadeIn();
         return false;  
-    }
-    function replaceString(sourceString, find, replace) {
-        return 
     }
     function getSelectedReplacements() {
         let selectedReplacements = [];
