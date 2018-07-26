@@ -5,7 +5,7 @@ $(document).ready(function () {
         if (contentParsed.length > 1) {
             for (let i = 0; i < contentParsed.length; i++) {
                 const element = contentParsed[i].trim();
-                $("#checkboxes").append(`<input type="checkbox" name="replacement" class="replaceChoice" value="${element}">${element}<br/>`);
+                $("#checkboxes").append(`<input type="checkbox" name="replacement" class="replaceChoice" value="${element}"> ${element}<br/>`);
             }
         } else {
             displayNotice("Source content was empty or invalid. Please edit index.html and add data to the #sourceSnippet element.<br/><br/>The data has to comma separated (e.g. value1, value2)"); 
@@ -20,6 +20,7 @@ $(document).ready(function () {
         const find = $("#find").val();
         const source = $("#source").val(); 
         const destination = $("#destination");
+        const contentType = $("input[name=contentType]:checked").val();
         if (selectedReplacements.length < 1) {
             displayNotice("Please select at least one item to replace the input with.");
             return false;
@@ -32,9 +33,9 @@ $(document).ready(function () {
             var findRegex = new RegExp(find,"g");
             const replacedString = source.replace(findRegex, selectedReplacements[i]);
             if(i != selectedReplacements.length) {
-                destination.append(replacedString + "<br/>");
+                appendContent(destination, replacedString, contentType, false);
             } else {
-                destination.append(replacedString);
+                appendContent(destination, replacedString, contentType, true);
             }
         }
         return false;    
@@ -52,6 +53,32 @@ $(document).ready(function () {
         }        
         return false;
     });
+    function appendContent(destination, replacedString, contentType, isLastElement) {
+        switch (contentType) {
+            case "html":
+                if(isLastElement) {
+                    destination.append(replacedString);
+                } else {
+                    destination.append(replacedString + "<br/>");
+                }
+                break;
+            case "url":
+                if(isLastElement) {
+                    destination.append(`<a href="${replacedString}">${replacedString}</a>`);
+                } else {
+                    destination.append(`<a href="${replacedString}">${replacedString}</a><br/>`);
+                }
+                break;
+            default: 
+                if(isLastElement) {
+                    destination.append(replacedString);
+                } else {
+                    destination.append(replacedString + "<br/>");
+                }
+                break;
+        }
+
+    }
     function hideNotice() {
         $("#notice").fadeOut();
     }
